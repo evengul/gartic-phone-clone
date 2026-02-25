@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { saveSessionToken } from "@/lib/session";
 
-export default function HomePage() {
+function JoinForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [nickname, setNickname] = useState("");
@@ -94,5 +94,13 @@ export default function HomePage() {
         Admin
       </a>
     </div>
+  );
+}
+
+export default function HomePage() {
+  return (
+    <Suspense>
+      <JoinForm />
+    </Suspense>
   );
 }
