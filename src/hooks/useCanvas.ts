@@ -14,7 +14,15 @@ interface Stroke {
 }
 
 function drawStroke(ctx: CanvasRenderingContext2D, stroke: Stroke) {
-  if (stroke.points.length < 2) return;
+  if (stroke.points.length === 0) return;
+  if (stroke.points.length === 1) {
+    const p = stroke.points[0];
+    ctx.fillStyle = stroke.color;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, stroke.width / 2, 0, Math.PI * 2);
+    ctx.fill();
+    return;
+  }
   ctx.strokeStyle = stroke.color;
   ctx.lineWidth = stroke.width;
   ctx.lineCap = "round";
@@ -73,6 +81,15 @@ export function useCanvas() {
       const point = getCanvasPoint(e);
       currentStrokeRef.current = { points: [point], color, width: brushSize };
       isDrawingRef.current = true;
+      // Draw the dot immediately for visual feedback
+      const canvas = canvasRef.current;
+      if (canvas) {
+        const ctx = canvas.getContext("2d")!;
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        ctx.arc(point.x, point.y, brushSize / 2, 0, Math.PI * 2);
+        ctx.fill();
+      }
     },
     [color, brushSize, getCanvasPoint]
   );
@@ -104,7 +121,7 @@ export function useCanvas() {
   );
 
   const onPointerUp = useCallback(() => {
-    if (currentStrokeRef.current && currentStrokeRef.current.points.length >= 2) {
+    if (currentStrokeRef.current && currentStrokeRef.current.points.length >= 1) {
       const finishedStroke = currentStrokeRef.current;
       setStrokes((prev) => [...prev, finishedStroke]);
     }
