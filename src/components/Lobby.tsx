@@ -45,7 +45,8 @@ export function Lobby({ state }: LobbyProps) {
 
   const handleCopyCode = async () => {
     try {
-      await navigator.clipboard.writeText(state.game.code);
+      const joinLink = `${window.location.origin}/?code=${state.game.code}`;
+      await navigator.clipboard.writeText(joinLink);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
@@ -64,7 +65,7 @@ export function Lobby({ state }: LobbyProps) {
           <button
             onClick={handleCopyCode}
             className="pixel-btn-sm bg-retro-surface text-text-muted hover:text-nes-cyan"
-            title="Kopier romkode"
+            title="Kopier invitasjonslenke"
           >
             {copied ? "\u2713" : "\u2398"}
           </button>

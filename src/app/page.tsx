@@ -1,13 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { saveSessionToken } from "@/lib/session";
 
 export default function HomePage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [nickname, setNickname] = useState("");
-  const [roomCode, setRoomCode] = useState("");
+  const [roomCode, setRoomCode] = useState(searchParams.get("code")?.toUpperCase() ?? "");
   const [error, setError] = useState("");
   const [joining, setJoining] = useState(false);
 

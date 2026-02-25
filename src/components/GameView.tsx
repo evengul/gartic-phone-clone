@@ -106,8 +106,9 @@ export function GameView({ code }: GameViewProps) {
 
   const handleCopyCode = async () => {
     try {
-      await navigator.clipboard.writeText(code);
-      showToast("Romkode kopiert!");
+      const joinLink = `${window.location.origin}/?code=${code}`;
+      await navigator.clipboard.writeText(joinLink);
+      showToast("Invitasjonslenke kopiert!");
     } catch {
       // fallback: do nothing
     }
@@ -143,7 +144,7 @@ export function GameView({ code }: GameViewProps) {
             <button
               onClick={handleCopyCode}
               className="font-heading text-xs text-nes-yellow hover:text-nes-cyan transition-colors cursor-pointer"
-              title="Klikk for å kopiere"
+              title="Kopier invitasjonslenke"
             >
               {code}
             </button>
