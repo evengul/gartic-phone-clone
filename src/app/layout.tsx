@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Press_Start_2P, Pixelify_Sans } from "next/font/google";
+import { Silkscreen, Pixelify_Sans } from "next/font/google";
 import "./globals.css";
 
-const pressStart = Press_Start_2P({
-  weight: "400",
+const silkscreen = Silkscreen({
+  weight: ["400", "700"],
   subsets: ["latin"],
   variable: "--font-pixel-heading",
   display: "swap",
@@ -27,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="no" className={`${pressStart.variable} ${pixelifySans.variable}`}>
+    <html lang="no" className={`${silkscreen.variable} ${pixelifySans.variable}`}>
       <body className="bg-retro-black text-text-primary min-h-screen retro-bg">
         <main className="max-w-3xl mx-auto px-4 py-8">{children}</main>
       </body>

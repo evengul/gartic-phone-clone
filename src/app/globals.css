@@ -40,7 +40,7 @@
   --color-text-dark: #1a1a2e;
 
   /* Font families */
-  --font-heading: var(--font-pixel-heading), "Press Start 2P", monospace;
+  --font-heading: var(--font-pixel-heading), "Silkscreen", monospace;
   --font-body: var(--font-pixel-body), "Pixelify Sans", system-ui, sans-serif;
 }
 
